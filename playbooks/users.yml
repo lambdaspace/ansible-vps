@@ -1,6 +1,8 @@
 ---
 - hosts: all
+  vars_files:
+    - variables/users.yml
   become: true
   become_user: root
   roles:
-    - geerlingguy.docker
+    - create_users

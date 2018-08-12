@@ -1,0 +1,43 @@
+---
+- name: Add users
+  user:
+    name={{ item.name }}
+    system={{ item.sudoer }}
+    shell=/bin/bash
+    append=yes
+    groups={{ item.group }}
+    password=$6$rounds=656000$iO7Q9L6/w8dUUQVf$rmtnxrQ15TGAfG5ODxQ/WGyEpTwk.vD1W.UtedmOlo9YNkrIwapYMjmKmteEnUJmRYucgUVxXUQy7gtenpLmw0
+    update_password=on_create
+  when: item.group is defined
+  with_items: users
+  notify:
+    - expire password
+
+- name: Add users
+  user:
+    name={{ item.name }}
+    system={{ item.sudoer }}
+    shell=/bin/bash
+    password=$6$rounds=656000$iO7Q9L6/w8dUUQVf$rmtnxrQ15TGAfG5ODxQ/WGyEpTwk.vD1W.UtedmOlo9YNkrIwapYMjmKmteEnUJmRYucgUVxXUQy7gtenpLmw0
+    update_password=on_create
+  when: item.group is not defined
+  with_items: "{{users}}"
+  notify:
+    - expire password {{ item.name }}
+
+- name: Insert public keys for ssh
+  authorized_key:
+    user: "{{ item.name }}"
+    state: present
+    key: "https://github.com/{{ item.name }}.keys"
+  when: item.ghandle is not defined
+  with_items: "{{users}}"
+
+- name: Insert public keys for ssh
+  authorized_key:
+    user: "{{ item.name }}"
+    state: present
+    key: "https://github.com/{{ item.ghandle }}.keys"
+  when: item.ghandle is defined
+  with_items: "{{users}}"
+
