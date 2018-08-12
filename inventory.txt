@@ -1,0 +1,8 @@
+[ovh]
+ovh.lambdaspace.gr:58922
+
+[grnet]
+grnet.lambdaspace.gr:50022
+
+[hostdog]
+hostdog.lambdaspace.gr:50022
