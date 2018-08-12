@@ -1,0 +1,8 @@
+users:
+  - name: panagiks
+    sudoer: yes
+  - name: alexdor
+    sudoer: yes
+  - name: master
+    sudoer: yes
+    ghandle: aetherc0r3
