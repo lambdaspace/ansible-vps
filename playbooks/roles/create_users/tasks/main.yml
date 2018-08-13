@@ -4,18 +4,23 @@
     name={{ item.name }}
     system={{ item.sudoer }}
     shell=/bin/bash
-    append=yes
-    groups={{ item.group }}
     password=$6$rounds=656000$iO7Q9L6/w8dUUQVf$rmtnxrQ15TGAfG5ODxQ/WGyEpTwk.vD1W.UtedmOlo9YNkrIwapYMjmKmteEnUJmRYucgUVxXUQy7gtenpLmw0
     update_password=on_create
   register: result
-  when: item.group is defined
   with_items: "{{ users }}"
 
 - name: Expire password of created users
   command: "chage -d 0 {{ item.name }}"
   when: item.changed == true
   with_items: "{{ result.results }}"
+
+- name: Add users to their groups
+  user:
+    name={{ item.name }}
+    append=yes
+    groups={{ item.group }}
+  when: item.group is defined
+  with_items: "{{ users }}"
 
 - name: Insert public keys for ssh
   authorized_key:
