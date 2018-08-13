@@ -1,3 +1,0 @@
----
-- name: expire password {{ username }}
-  command: "chage -d 0 {{ username }}"

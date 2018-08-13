@@ -11,3 +11,5 @@ Create users on all hosts:
 ```sh
 ansible-playbook playbooks/users.yml --ask-become-pass
 ```
+
+In some cases the --user parameter may be required if not defined globally.
