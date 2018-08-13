@@ -1,4 +1,10 @@
 ---
+- name: Ensure groups exist
+  group:
+    name: "{{ item.name }}"
+    state: "{% if item.present %}present{% else %}absent{% endif %}"
+  with_items: "{{ usergroups }}"
+
 - name: Add users
   user:
     name={{ item.name }}
