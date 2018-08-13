@@ -1,0 +1,7 @@
+usergroups:
+  - name: sudo
+    present: yes
+  - name: docker
+    present: yes
+  - name: devops
+    present: yes

@@ -2,6 +2,7 @@
 - hosts: all
   vars_files:
     - variables/users.yml
+    - variables/usergroups.yml
   become: true
   become_user: root
   roles:
