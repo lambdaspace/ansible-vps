@@ -1,8 +1,11 @@
 users:
   - name: panagiks
     sudoer: yes
+    group: "sudo, docker"
   - name: alexdor
     sudoer: yes
+    group: "sudo, docker"
   - name: master
     sudoer: yes
+    group: "sudo, docker"
     ghandle: aetherc0r3
