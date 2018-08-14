@@ -32,15 +32,5 @@
   authorized_key:
     user: "{{ item.name }}"
     state: present
-    key: "https://github.com/{{ item.name }}.keys"
-  when: item.ghandle is not defined
+    key: "https://github.com/{{ item.ghandle | default(item.name) }}.keys"
   with_items: "{{ users }}"
-
-- name: Insert public keys for ssh
-  authorized_key:
-    user: "{{ item.name }}"
-    state: present
-    key: "https://github.com/{{ item.ghandle }}.keys"
-  when: item.ghandle is defined
-  with_items: "{{ users }}"
-
