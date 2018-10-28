@@ -1,5 +1,15 @@
 # ansible-vps
 
+## Dependencies
+
+To install dependencies from Ansible Galaxy:
+
+```sh
+ansible-galaxy install -r requirements.yml
+```
+
+## Playbooks
+
 Install docker on all hosts:
 
 ```sh
